@@ -1,0 +1,21 @@
+---
+version: '3'
+
+services:
+  fastapi:
+    container_name: fastapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dceoy/fastapi:latest
+    ports:
+      - 8000:8000
+    volumes:
+      - ${PWD}:/wd:ro
+    working_dir: /wd
+    entrypoint:
+      - /usr/local/bin/uvicorn
+    command:
+      - main:app
+      - --host=0.0.0.0
+      - --reload
